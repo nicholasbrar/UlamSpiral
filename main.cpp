@@ -41,7 +41,7 @@ void printSpiral(int num){
       }
 
       dir = (dir + 1) % 4; // Change direction
-      //dog balls
+
       // Increase step count every two direction changes (one full cycle: right-down-left-up)
       if (dir == 0 || dir == 2) steps++;
   }

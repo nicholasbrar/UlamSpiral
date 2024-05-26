@@ -2,6 +2,8 @@
 #include <vector>
 #include <cmath>
 #include <stdlib.h> 
+#include <windows.h>
+
 
 bool isPrime(int num){
   if(num <= 1) return false;
@@ -76,6 +78,8 @@ int main(){
   else{
     std::cout << "Invalid Input, Must be a perfect square" << std::endl;
   }
+
+  Sleep(8000);
   
   return 0;
 }

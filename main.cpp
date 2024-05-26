@@ -64,19 +64,29 @@ void printSpiral(int num){
 }
 
 bool isPerfectSquare(int num){
-  return(sqrt(num) * sqrt(num) == num);
+    int root = sqrt(num);
+    return (root * root == num);
 }
 
+int nearestPerfectSquare(int num) {
+    int numCopy = num; 
+    while (!isPerfectSquare(numCopy)) {
+        numCopy++;
+    }
+    return numCopy;
+}
 
 int main(){
   int n;
+
+  std::cout << "Enter the number to spiral down from: ";
   std::cin >> n; 
 
   if(isPerfectSquare(n)){
     printSpiral(n);
   }
   else{
-    std::cout << "Invalid Input, Must be a perfect square" << std::endl;
+    printSpiral(nearestPerfectSquare(n));
   }
 
   Sleep(8000);

@@ -12,8 +12,10 @@ This program was devised to visualize this spiral to whichever number is specifi
 For determining whether an integer is prime, this program uses
 
 * [Trial Division](https://en.wikipedia.org/wiki/Trial_division)
-<br/> or
-* [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+<br/>
 
-Depending on the size of the number.
+Later on, I plan on implementing
+ [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+
+for efficiency when computing the primality of larger numbers.
 

@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <fstream>
 
-bool isPrime(int num){ // Checks if num is prime
+bool isPrime(int num){ // Checks if number is prime
   if(num <= 1) return false;
   if(num <= 3) return true; 
   if(num % 2 == 0 || num % 3 == 0) return false;

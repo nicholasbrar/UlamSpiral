@@ -4,12 +4,11 @@
 #include <stdlib.h> 
 #include <windows.h>
 
-
-bool isPrime(int num){
+bool isPrime(int num){ // Checks if num is prime
   if(num <= 1) return false;
   if(num <= 3) return true; 
   if(num % 2 == 0 || num % 3 == 0) return false;
-  for (int i = 5; i * i <= num; i += 6)  // prime 
+  for (int i = 5; i * i <= num; i += 6)  
       if (num % i == 0 || num % (i + 2) == 0)
           return false;
   return true;
@@ -50,7 +49,7 @@ void printSpiral(int num){
 
 
 
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < size; i++) { // Output visualization
       for (int j = 0; j < size; j++) {
           if(isPrime(spiral[i][j])){
             std::cout << "\033[31m*\033[0m" << " ";

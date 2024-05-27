@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <fstream>
 
-bool isPrime(int num){ // Checks if number is prime       test
+bool isPrime(int num){ // Checks if number is prime  
   if(num <= 1) return false;
   if(num <= 3) return true; 
   if(num % 2 == 0 || num % 3 == 0) return false;
@@ -15,7 +15,7 @@ bool isPrime(int num){ // Checks if number is prime       test
   return true;
 }
 
-void printSpiral(int num){
+void printSpiral(int num, std::ofstream& output){
   int size = sqrt(num);
   std::vector<std::vector<int>> spiral(size, std::vector<int>(size, 0));
 
@@ -37,7 +37,6 @@ void printSpiral(int num){
               spiral[x][y] = val++;
               if (val > num) break; // Stop if we've placed all numbers
           }
-          // Move to next cell in the current direction
           x += dirs[dir][0];
           y += dirs[dir][1];
       }
@@ -53,13 +52,13 @@ void printSpiral(int num){
   for (int i = 0; i < size; i++) { // Output visualization
       for (int j = 0; j < size; j++) {
           if(isPrime(spiral[i][j])){
-            std::cout << "\033[31m*\033[0m" << " ";
+              output << "* ";
           }
           else{
-            std::cout << "\033[34m#\033[0m" << " ";
+              output << "# ";
           }
       }
-      std::cout << std::endl;
+      output << std::endl;
   }
 }
 
@@ -78,18 +77,24 @@ int nearestPerfectSquare(int num) {
 
 int main(){
   int n;
+  std::ofstream outputFile("spiral_output1000000.txt");
+
+  if (!outputFile.is_open()) {
+      std::cerr << "Failed to open output file." << std::endl;
+      return 1;
+  }
 
   std::cout << "Enter the number to spiral down from: ";
   std::cin >> n; 
 
   if(isPerfectSquare(n)){
-    printSpiral(n);
+    printSpiral(n, outputFile);
   }
   else{
-    printSpiral(nearestPerfectSquare(n));
+    printSpiral(nearestPerfectSquare(n), outputFile);
   }
 
-  Sleep(8000);
+  outputFile.close();
   
   return 0;
 }

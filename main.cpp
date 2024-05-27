@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdlib.h> 
 #include <windows.h>
+#include <fstream>
 
 bool isPrime(int num){ // Checks if num is prime
   if(num <= 1) return false;

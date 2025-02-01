@@ -1,100 +1,117 @@
-#include <iostream> 
+#include <iostream>
 #include <vector>
 #include <cmath>
-#include <stdlib.h> 
-#include <windows.h>
 #include <fstream>
 
-bool isPrime(int num){ // Checks if number is prime  
-  if(num <= 1) return false;
-  if(num <= 3) return true; 
-  if(num % 2 == 0 || num % 3 == 0) return false;
-  for (int i = 5; i * i <= num; i += 6)  
-      if (num % i == 0 || num % (i + 2) == 0)
-          return false;
-  return true;
-}
+class Ulam {
+public:
+    std::vector<std::vector<int>> matrix; 
+    std::vector<bool> primes; 
 
-void printSpiral(int num, std::ofstream& output){
-  int size = sqrt(num);
-  std::vector<std::vector<int>> spiral(size, std::vector<int>(size, 0));
+    Ulam(int num) {
+        primes = sieve(num);
+        int size = sqrt(num);
+        matrix.resize(size, std::vector<int>(size, 0));
 
-  int x = size / 2, y = size / 2; 
+        generateSpiral(num);
+    }
 
-  if(num % 2 == 0){ 
-    x -= 1;
-    y -= 1;
-  }
+    // Sieve of Eratosthenes 
+    std::vector<bool> sieve(int num) {
+        std::vector<bool> prime(num + 1, true);
+        for (int p = 2; p * p <= num; p++) {
+            if (prime[p]) {
+                for (int i = p * p; i <= num; i += p) {
+                    prime[i] = false;
+                }
+            }
+        }
+        return prime;
+    }
 
-  int dirs[4][2] = {{0,1}, {-1,0}, {0,-1}, {1,0}}; // Right, Up, Left, Down
-  int dir = 0;  // Start direction is right
-  int steps = 1; // Steps to take in current direction
+    // Generate the spiral matrix
+    void generateSpiral(int num) {
+        int size = sqrt(num);
+        int x = size / 2, y = size / 2;
 
-  int val = 1; // Initial value to fill in spiral, Increments 
-  while (val <= num) {
-      for (int i = 0; i < steps; ++i) { // Move steps in current direction
-          if (x >= 0 && x < size && y >= 0 && y < size) {
-              spiral[x][y] = val++;
-              if (val > num) break; // Stop if we've placed all numbers
-          }
-          x += dirs[dir][0];
-          y += dirs[dir][1];
-      }
+        if (num % 2 == 0) {
+            x -= 1;
+            y -= 1;
+        }
 
-      dir = (dir + 1) % 4; // Change direction
+        int dirs[4][2] = { {0,1}, {-1,0}, {0,-1}, {1,0} }; // Right, Up, Left, Down
+        int dir = 0;  // Start direction is right
+        int steps = 1; // Steps to take in current direction
 
-      // Increase step count every two direction changes (one full cycle: right-down-left-up)
-      if (dir == 0 || dir == 2) steps++;
-  }
+        int val = 1; // Initial value to fill in spiral, Increments 
+        while (val <= num) {
+            for (int i = 0; i < steps; ++i) { // Move steps in current direction
+                if (x >= 0 && x < size && y >= 0 && y < size) {
+                    matrix[x][y] = val++;
+                    if (val > num) break; // Stop if we've placed all numbers
+                }
+                x += dirs[dir][0];
+                y += dirs[dir][1];
+            }
 
+            dir = (dir + 1) % 4; // Change direction
 
+            // Increase step count every two direction changes (one full cycle: right-down-left-up)
+            if (dir == 0 || dir == 2) steps++;
+        }
+    }
 
-  for (int i = 0; i < size; i++) { // Output visualization
-      for (int j = 0; j < size; j++) {
-          if(isPrime(spiral[i][j])){
-              output << "* ";
-          }
-          else{
-              output << "# ";
-          }
-      }
-      output << std::endl;
-  }
-}
+    void printSpiral(std::ofstream& output) {
+        int size = matrix.size();
+        for (int i = 0; i < size; i++) { 
+            for (int j = 0; j < size; j++) {
+                if (primes[matrix[i][j]]) {
+                    output << "* ";
+                }
+                else {
+                    output << "# ";
+                }
+            }
+            output << std::endl;
+        }
+    }
 
-bool isPerfectSquare(int num){
+    int maxDiagonalSequence() {
+        
+    }
+};
+
+bool isPerfectSquare(int num) {
     int root = sqrt(num);
     return (root * root == num);
 }
 
 int nearestPerfectSquare(int num) {
-    int numCopy = num; 
+    int numCopy = num;
     while (!isPerfectSquare(numCopy)) {
         numCopy++;
     }
     return numCopy;
 }
 
-int main(){
-  int n;
-  std::ofstream outputFile("spiral_output1000000.txt");
+int main() {
+    int n;
+    std::ofstream outputFile("spiral_output10000.txt");
 
-  if (!outputFile.is_open()) {
-      std::cerr << "Failed to open output file." << std::endl;
-      return 1;
-  }
+    if (!outputFile.is_open()) {
+        std::cerr << "Failed to open output file." << std::endl;
+        return 1;
+    }
 
-  std::cout << "Enter the number to spiral down from: ";
-  std::cin >> n; 
+    std::cout << "Enter the number to spiral down from: ";
+    std::cin >> n;
 
-  if(isPerfectSquare(n)){
-    printSpiral(n, outputFile);
-  }
-  else{
-    printSpiral(nearestPerfectSquare(n), outputFile);
-  }
+    int targetNum = isPerfectSquare(n) ? n : nearestPerfectSquare(n);
+    Ulam spiral(targetNum);
 
-  outputFile.close();
-  
-  return 0;
+    spiral.printSpiral(outputFile);
+
+    outputFile.close();
+    
+    return 0;
 }

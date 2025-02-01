@@ -15,6 +15,11 @@ For determining whether an integer is prime, this program uses
 
 for efficiency when computing the primality of larger numbers. I previously used trial division, but learned about Sieve through exploring number theory and algorithms. 
 
+# Ongoing Efforts
+It's my goal to implement an algorithm which computes the diagonal of max length containing only primes. I intend on using a sliding-window approach in the goal of computational efficiency. 
+
+I'd like to attempt to define a function f: n -> d, where n is the width of the (n x n) matrix and d is the length of the max diagonal, and see if any interesting results follow.
+
 # Results
 The interesting nature of the Ulam Spiral is rooted in the striking presence of diagonals that form. 
 

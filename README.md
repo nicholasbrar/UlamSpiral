@@ -11,13 +11,9 @@ This program was devised to visualize this spiral to whichever number is specifi
 
 For determining whether an integer is prime, this program uses
 
-* [Trial Division](https://en.wikipedia.org/wiki/Trial_division)
-<br/>
+[Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) 
 
-Later on, I plan on implementing
- [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) 
-
-for efficiency when computing the primality of larger numbers.
+for efficiency when computing the primality of larger numbers. I previously used trial division, but learned about Sieve through exploring number theory and algorithms. 
 
 # Results
 The interesting nature of the Ulam Spiral is rooted in the striking presence of diagonals that form. 

@@ -22,6 +22,7 @@ I'd like to attempt to define a function f: n -> d, where n is the width of the 
 
 Update from early 2025: 
 Preliminary research questions that I've defined with the hopes to revisiting when my schedule allows.
+![image](file:///C:/Users/14123/Downloads/Ulam_Research.pdf)
 
 
 # Results

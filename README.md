@@ -20,6 +20,10 @@ It's my goal to implement an algorithm which computes the diagonal of max length
 
 I'd like to attempt to define a function f: n -> d, where n is the width of the (n x n) matrix and d is the length of the max diagonal, and see if any interesting results follow.
 
+Update from early 2025: 
+Preliminary research questions that I've defined with the hopes to revisiting when my schedule allows.
+
+
 # Results
 The interesting nature of the Ulam Spiral is rooted in the striking presence of diagonals that form. 
 
